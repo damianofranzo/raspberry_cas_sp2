@@ -8,14 +8,26 @@
  
 #define BUTTON_PIN 0
  
-// the event counter 
-volatile int eventCounter = 0;
+// counters that track when the signal goes up and down 
+volatile int upcounter = 0;
+volatile int downcounter = 0;
+volatile int flag=0;
  
 // -------------------------------------------------------------------------
  
-void myInterrupt(void) {
-   eventCounter++;
+void SignalUpDownInterrupt(void) {
+  if(flag){
+    upcounter++;
+    flag=0;
+    //pinx V up
+  }
+  else{
+    downcounter++;
+    flag=1;
+     //pinx V up
+  }
 }
+
  
 // -------------------------------------------------------------------------
  
@@ -25,19 +37,19 @@ int main() {
       fprintf (stderr, "Unable to setup wiringPi: %s\n", strerror (errno));
       return 1;
   }
- 
-  // set Pin 17/0 gener an interrupt on high-to-low transitions
-  // and attach myInterrupt() to the interrupt
-  if ( wiringPiISR (BUTTON_PIN, INT_EDGE_FALLING, &myInterrupt) < 0 ) {
-      fprintf (stderr, "Unable to setup ISR: %s\n", strerror (errno));
+
+  if (wiringPiISR (BUTTON_PIN, INT_EDGE_BOTH, &SignalUpDownInterrupt) < 0 ) {
+      fprintf (stderr, "Unable to setup ISR for INT_EDGE_BOTH: %s\n", strerror (errno));
       return 1;
   }
+
  
   // display counter value every second.
   while ( 1 ) {
-    printf( "%d\n", eventCounter );
-    eventCounter = 0;
-    delay( 2000 ); // wait 2 second
+    printf( "Up times: %d Down times: %d \n", upcounter,downcounter);
+    upcounter = 0;
+    downcounter=0;
+    delay( 1000 ); // wait 1 second
   }
  
   return 0;
