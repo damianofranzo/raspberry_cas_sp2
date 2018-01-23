@@ -1,1 +1,0 @@
-cmd_/home/pi/Desktop/mykernelmodule/ISRgpiointerrupts.ko := ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/pi/Desktop/mykernelmodule/ISRgpiointerrupts.ko /home/pi/Desktop/mykernelmodule/ISRgpiointerrupts.o /home/pi/Desktop/mykernelmodule/ISRgpiointerrupts.mod.o ;  true
