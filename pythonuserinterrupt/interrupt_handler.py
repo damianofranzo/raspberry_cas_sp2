@@ -4,17 +4,22 @@ import RPi.GPIO as GPIO
 import time
 GPIO.setmode(GPIO.BCM)
 
-global counter;
-counter =0;
+global counter
+global delaytime
+counter =0
+dealtime=50.0/1000.0
 
 
 def updown(channel):
-    global counter
-    counter=counter+1
-    #voltage up on pin X
-GPIO.setup(17,GPIO.IN)
-GPIO.add_event_detect(17,GPIO.BOTH,callback=updown)
+    global dealytime
+    GPIO.output(12,GPIO.HIGH)
+    time.sleep(delaytime)
+    GPIO.output(12,GPIO.LOW)
 
-while(1):
-    print("counter= "+str(counter))
-    time.sleep(1)
+GPIO.setup(7,GPIO.IN)
+GPIO.setup(12,GPIO.OUT)
+GPIO.add_event_detect(12,GPIO.RISING,callback=updown)
+
+print("program running, press enter to stop it")
+a=input("press\n")
+GPIO.output(12,GPIO.LOW)

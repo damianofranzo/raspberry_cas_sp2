@@ -2,35 +2,23 @@
 #include <string.h>
 #include <errno.h>
 #include <stdlib.h>
-#include <wiringPi.h>
+#include <wiringPi.h> 
 
-// Use GPIO Pin 17, which is Pin 0 for wiringPi library
- 
-#define BUTTON_PIN 0
- 
-// counters that track when the signal goes up and down 
-volatile int upcounter = 0;
-volatile int downcounter = 0;
-volatile int flag=0;
- 
-// -------------------------------------------------------------------------
- 
+#define BUTTON_PIN 11
+//it's GPIO7
+#define OUTPUT_PIN 26
+//it's GPIO12
+
+volatile int delaytime=50;
+
+//User-level ISR
 void SignalUpDownInterrupt(void) {
-  if(flag){
-    upcounter++;
-    flag=0;
-    //pinx V up
-  }
-  else{
-    downcounter++;
-    flag=1;
-     //pinx V up
-  }
+  digitalWrite(OUTPUT_PIN,1);
+  delay(delaytime);
+  digitalWrite(OUTPUT_PIN,0);
 }
+ 
 
- 
-// -------------------------------------------------------------------------
- 
 int main() {
   // sets up the wiringPi library
   if (wiringPiSetup () < 0) {
@@ -38,18 +26,16 @@ int main() {
       return 1;
   }
 
-  if (wiringPiISR (BUTTON_PIN, INT_EDGE_BOTH, &SignalUpDownInterrupt) < 0 ) {
+  if (wiringPiISR (BUTTON_PIN, INT_EDGE_RISING, &SignalUpDownInterrupt) < 0 ) {
       fprintf (stderr, "Unable to setup ISR for INT_EDGE_BOTH: %s\n", strerror (errno));
       return 1;
   }
-
+  //it's inizialized the user-level ISR related to GPIO associated to number BUTTOM_PIN
+  //the flag INT_EDGE_RISING indicates that the user-level ISR has to be called only in low-high transition
  
-  // display counter value every second.
   while ( 1 ) {
-    printf( "Up times: %d Down times: %d \n", upcounter,downcounter);
-    upcounter = 0;
-    downcounter=0;
-    delay( 1000 ); // wait 1 second
+    printf( "Program running\n");
+    delay( 1000 );
   }
  
   return 0;
