@@ -28,7 +28,7 @@ If you want to test the result, you should have an oscilloscope and a signal gen
 ![second.jpg](https://image.ibb.co/kQ6bgn/second.jpg)
 
 Otherwise, providing a square wave with GPIO21 this should be the configuration.
-
+ 
 ![first.jpg](https://image.ibb.co/gaeCMn/first_1.jpg)
 
 # RPi library, User-level ISR
