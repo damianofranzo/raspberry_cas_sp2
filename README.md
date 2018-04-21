@@ -24,7 +24,7 @@ If you want to test the result, you should have an oscilloscope and a signal gen
 {second.jpg}
 Otherwise, providing a square wave with GPIO21 this should be the configuration.
 {first.jpg}
-### RPi library, User-level ISR
+# RPi library, User-level ISR
 In the folder pythonuserinterrupt there is a Python program that creates an Interrupt Handler. This is a very high level of ISR, in fact, the performance is low compared with the kernel module solution.
 For running the program just execute in the shell
 ```sh
