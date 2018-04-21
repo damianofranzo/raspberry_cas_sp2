@@ -21,9 +21,13 @@ Make sure to clone the repository, which is available in:
 https://github.com/damianofranzo/raspberry_cas_sp2
 ### Connections
 If you want to test the result, you should have an oscilloscope and a signal generator. In every solution the Input GPIO is GPIO7 and the Output GPIO is GPIO12, so make sure that the Raspberry GPIO and other devices are connected in this way:
-{second.jpg}
+
+![second.jpg](https://image.ibb.co/kQ6bgn/second.jpg)
+
 Otherwise, providing a square wave with GPIO21 this should be the configuration.
-{first.jpg}
+
+![first.jpg](https://image.ibb.co/gaeCMn/first_1.jpg)
+
 # RPi library, User-level ISR
 In the folder pythonuserinterrupt there is a Python program that creates an Interrupt Handler. This is a very high level of ISR, in fact, the performance is low compared with the kernel module solution.
 For running the program just execute in the shell
@@ -71,6 +75,3 @@ To remove the module you have to execute:
 ```sh
 $sudo rmmod ISRgpiointerrupts.ko
 ```
-
-# Additional informations and further documentations
-
