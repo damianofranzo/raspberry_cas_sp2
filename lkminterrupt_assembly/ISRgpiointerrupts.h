@@ -1,0 +1,3 @@
+#define OUTPUT_GPIO 12
+#define INPUT_GPIO 7
+#define DELAY_TIME 200
