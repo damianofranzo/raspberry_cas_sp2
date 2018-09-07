@@ -14,7 +14,6 @@ MODULE_AUTHOR("Franzò Damiano, Borzacchi Marco, Alisa Arakelyan");
 MODULE_DESCRIPTION("It raise up pin 12 when pin 7 is up");
 MODULE_VERSION("1.0");
 
-static bool on=true;
 static bool off=false;
 static int irq_n;
 
